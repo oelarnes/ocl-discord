@@ -1,0 +1,19 @@
+{
+  "name": "ocl-discord",
+  "version": "0.0.1",
+  "description": "Discord bot for Online Cube League",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oelarnes/ocl-discord.git"
+  },
+  "author": "Joel Barnes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oelarnes/ocl-discord/issues"
+  },
+  "homepage": "https://github.com/oelarnes/ocl-discord#readme"
+}
