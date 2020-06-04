@@ -1,6 +1,5 @@
 {
   "name": "ocl-discord",
-  "type": "module",
   "version": "0.0.1",
   "description": "Discord bot for Online Cube League",
   "main": "index.js",
