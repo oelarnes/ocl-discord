@@ -4,31 +4,25 @@ const { readFileSync } = require('fs')
 const axios = require('axios').default;
 
 const bot = new Discord.Client()
-const { token } = ini.parse(readFileSync('./config.ini', 'utf-8'))
+const { discord, port } = ini.parse(readFileSync('./config.ini', 'utf-8'))
 
-async function getStandings(season) {
-    const {data} = await axios.post('http://onlinecubeleague.com/api/data', {query: 
-    `{standings(season: "${season}"){player{discordHandle}qps,matchWins,matchLosses,allTimeRank}}`
+async function getStandings() {
+    const {data} = await axios.post(`http://localhost:${port}/api/data`, {query: 
+    `{events{standingsJpgURL}}`
     }).catch(console.log)
 
-    return data.data.standings
+    return data.data.events.filter(r => r.standingsJpgURL)[0].standingsJpgURL
 }
 
 bot.on("message", message => {
     // If the message is "ping"
-    if (message.content === 'ping') {
+    if (message.content === '!standings') {
         // Send "pong" to the same channel
-        getStandings("2020").then((data) => {
-            const standingsEmbed = data.reduce((embed, row) => {
-                return embed.addFields(
-                    {name: 'Player', value: row.player.discordHandle},
-                    {name: 'QPs', value: row.qps, inline: true},
-                )
-            }, new Discord.MessageEmbed())
-            message.channel.send(standingsEmbed)
+        getStandings().then((data) => {
+            console.log(data)
+            message.channel.send(new Discord.MessageEmbed().setImage(data))
         })
-        
     }
 }); 
 
-bot.login(token)
+bot.login(discord.token)
