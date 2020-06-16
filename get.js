@@ -2,7 +2,7 @@ const axios = require('axios').default;
 const { readFileSync } = require('fs')
 const ini = require('ini')
 
-const { port } = ini.parse(readFileSync('./config.ini', 'utf-8'))
+const { port } = ini.parse(readFileSync('./discord.ini', 'utf-8'))
 const OCL_API = `http://localhost:${port}/api/data`
 
 async function getStandings() {
