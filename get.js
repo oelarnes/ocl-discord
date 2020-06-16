@@ -3,7 +3,7 @@ const { readFileSync } = require('fs')
 const ini = require('ini')
 
 const { port } = ini.parse(readFileSync('./config.ini', 'utf-8'))
-const OCL_API = `http://onlinecubeleague.com/api/data`
+const OCL_API = `http://localhost:${port}/api/data`
 
 async function getStandings() {
     const {data} = await axios.post(OCL_API, {
@@ -14,7 +14,7 @@ async function getStandings() {
         }`
     }).catch(console.log)
 
-    return data.data.events.filter(r => r.standingsJpgURL)[0].standingsJpgURL
+    return data.data.events.filter(r => r.standingsJpgURL !== undefined)[0].standingsJpgURL
 }
 
 async function getDraftlog(eventId, discordHandle) {
