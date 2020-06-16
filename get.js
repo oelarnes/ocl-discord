@@ -14,7 +14,7 @@ async function getStandings() {
         }`
     }).catch(console.log)
 
-    return data.data.events.filter(r => r.standingsJpgURL !== undefined)[0].standingsJpgURL
+    return data.data.events.filter(r => r.standingsJpgURL != null)[0].standingsJpgURL
 }
 
 async function getDraftlog(eventId, discordHandle) {
